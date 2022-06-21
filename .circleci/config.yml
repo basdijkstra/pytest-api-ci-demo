@@ -19,15 +19,9 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command: pytest ./api_test_examples.py --junitxml=results.xml
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/
-            find . -type f -regex "results.xml" -exec cp {} ~/test-results/ \;
-          when: always
-            - store_test_results:
-                path: ~/test-results
+          command: pytest ./api_test_examples.py --junitxml=~/reports/results.xml
+      - store_test_results:
+          path: ~/reports
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
